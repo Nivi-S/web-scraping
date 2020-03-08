@@ -4,11 +4,31 @@ import re
 import requests
 import pressSource as ps
 import urllib3
+import flask
 from flask import jsonify
 # import flask
 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
+def extract_headline(soup, id):
+    # Return the first or last occurrence of "STATUS". Hardcoded for UCLA/USC, not sure of a better way.
+    if id == "UCLA":
+        sentences = soup.find_all(string=re.compile(
+            'STATUS'))
+        if len(sentences) > 0:
+            return sentences[0]
+
+    elif id == "USC":
+        sentences = soup.find_all(string=re.compile(
+            'STATUS'))
+        if len(sentences) > 0:
+            return sentences[-1]
+
+    # elif id == ""
+
+    return "Link"
 
 
 def extract_num_cases(sentence, word_set):
@@ -87,6 +107,8 @@ def scrapeHTML(str_url):
     # Set the date value
 
     press_source.date = extract_date(soup)
+    press_source.headline = extract_headline(soup, press_source.id)
+    print("Headline = ", press_source.headline)
     print("Date = ", press_source.date)
     print("Source =", str_url, "\n ================ \n")
 
@@ -139,26 +161,20 @@ def scrapeHTML(str_url):
         press_source.set_deaths(max(death_numbers))
     else:
         press_source.set_deaths(0)
-
+    print("========================")
     print("Confirmed: ", press_source.confirmed)
     print("Deaths: ", press_source.deaths)
 
-    return jsonify(
-        confirmed=press_source.confirmed,
-        deaths=press_source.deaths,
-        level=press_source.level,
-        url=press_source.url,
-        date=press_source.date
-    )
+    return press_source
 
 
 if __name__ == "__main__":
     #url = 'https://www.cdc.gov/coronavirus/2019-ncov/cases-in-us.html'
     #url = 'https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Immunization/ncov2019.aspx'
-    url = 'https://twitter.com/lapublichealth/status/1236398593226895360'
-    # url = 'http://publichealth.lacounty.gov/media/Coronavirus/'
-    # url = 'https://sites.usc.edu/coronavirus/'
-    # url = 'https://newsroom.ucla.edu/stories/coronavirus-information-for-the-ucla-campus-community'
+    url = 'https://twitter.com/lapublichealth/'
+    # url = 'http://publichealth.lacounty.gov/media/Coronavirus/' #not as updated as twitter
+    #url = 'https://sites.usc.edu/coronavirus/'
+    #url = 'https://newsroom.ucla.edu/stories/coronavirus-information-for-the-ucla-campus-community'
     scrapeHTML(url)
 
 # ============================

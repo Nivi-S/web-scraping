@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import scraper as sc
+import pressSource as ps
 #import requests
+from flask import jsonify
 
 
 import urllib3
@@ -39,29 +41,73 @@ def test():
 
 @app.route("/UCLA/")
 def getUCLAnews():
-    return sc.scrapeHTML('https://newsroom.ucla.edu/stories/coronavirus-information-for-the-ucla-campus-community')
+    press_source = sc.scrapeHTML(
+        'https://newsroom.ucla.edu/stories/coronavirus-information-for-the-ucla-campus-community')
+    return jsonify(
+        confirmed=press_source.confirmed,
+        deaths=press_source.deaths,
+        level=press_source.level,
+        headline=press_source.headline,
+        url=press_source.url,
+        date=press_source.date
+    )
 
 
 @app.route("/USC/")
 def getUSCnews():
     # press_source = sc.scrapeHTML('https://sites.usc.edu/coronavirus/')
     # return str(press_source.confirmed)
-    return sc.scrapeHTML('https://sites.usc.edu/coronavirus/')
+    press_source = sc.scrapeHTML('https://sites.usc.edu/coronavirus/')
+    return jsonify(
+        confirmed=press_source.confirmed,
+        deaths=press_source.deaths,
+        level=press_source.level,
+        headline=press_source.headline,
+        url=press_source.url,
+        date=press_source.date
+    )
 
 
 @app.route("/LAC/")
 def getLACnews():
-    return sc.scrapeHTML('http://publichealth.lacounty.gov/media/Coronavirus/')
+    press_source = sc.scrapeHTML(
+        'http://publichealth.lacounty.gov/media/Coronavirus/')
+    return jsonify(
+        confirmed=press_source.confirmed,
+        deaths=press_source.deaths,
+        level=press_source.level,
+        headline=press_source.headline,
+        url=press_source.url,
+        date=press_source.date
+    )
 
 
 @app.route("/CA/")
 def getCAnews():
-    return sc.scrapeHTML('https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Immunization/ncov2019.aspx')
+    press_source = sc.scrapeHTML(
+        'https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Immunization/ncov2019.aspx')
+    return jsonify(
+        confirmed=press_source.confirmed,
+        deaths=press_source.deaths,
+        level=press_source.level,
+        headline=press_source.headline,
+        url=press_source.url,
+        date=press_source.date
+    )
 
 
 @app.route("/CDC/")
 def getCDCnews():
-    return sc.scrapeHTML('https://www.cdc.gov/coronavirus/2019-ncov/cases-in-us.html')
+    press_source = sc.scrapeHTML(
+        'https://www.cdc.gov/coronavirus/2019-ncov/cases-in-us.html')
+    return jsonify(
+        confirmed=press_source.confirmed,
+        deaths=press_source.deaths,
+        level=press_source.level,
+        headline=press_source.headline,
+        url=press_source.url,
+        date=press_source.date
+    )
 
 
 if __name__ == "__main__":
