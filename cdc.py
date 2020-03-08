@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 #import requests
 import re
+import pressSource
 
 driver = webdriver.Chrome()
 url = "https://www.cdc.gov/coronavirus/2019-ncov/cases-in-us.html"
