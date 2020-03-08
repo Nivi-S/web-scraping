@@ -10,6 +10,40 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
+def extract_num_cases(sentence, word_set):
+    delta = 40
+    numbers = []
+    for word in word_set:
+        idx_char = sentence.find(word)
+        if idx_char != -1:
+            # Found the key word, now look for the number of cases close to the key word, using regex pattern matching
+            search_range = (max(0, idx_char - delta),
+                            min(len(sentence), idx_char + delta))
+            # print(sentence[search_range[0]:search_range[1]])
+
+            num = re.search(
+                '\s[0-9]+',  sentence[search_range[0]:search_range[1]])
+            if num is not None:
+                # print("Pattern matching:")
+                # print(num.group(0))
+                numbers.append(int(num.group(0).strip()))
+
+    # print("Sentence's set of numbers", numbers)
+    return numbers
+
+
+def extract_date(soup):
+    date_sentences = soup.find_all(string=re.compile(
+        '[ADFJMNOS]\w* [\d]{1,2},* [\d]{4}'))
+
+    if len(date_sentences) == 0:
+        date = ""
+    else:
+        date = re.search(
+            '[ADFJMNOS]\w* [\d]{1,2},* [\d]{4}', date_sentences[0]).group()
+    return date
+
+
 def scrapeHTML(str_url):
     # Check that the URL is valid
     content = requests.get(str_url, verify=False)
@@ -40,21 +74,12 @@ def scrapeHTML(str_url):
         exit(1)
 
     # Set the date value
-    date_sentences = soup.find_all(string=re.compile(
-        '[ADFJMNOS]\w* [\d]{1,2},* [\d]{4}'))
 
-    if len(date_sentences) == 0:
-        date = ""
-    else:
-        date = re.search(
-            '[ADFJMNOS]\w* [\d]{1,2},* [\d]{4}', date_sentences[0]).group()
-
-    press_source.date = date
-    print("Date = ", date)
-    print(press_source.date)
+    press_source.date = extract_date(soup)
+    print("Date = ", press_source.date)
     print("Source =", str_url, "\n ================ \n")
 
-    # Return sentences containing these hit words
+    # Return sentences containing these general hit words
     hit_words = {'STATUS', 'status', 'Total', 'total', 'cases'}
     hit_results = []
     for word in hit_words:
@@ -63,10 +88,10 @@ def scrapeHTML(str_url):
 
     hit_results = [el.replace('\xa0', ' ') for el in hit_results]
 
-    # print('hit_results =', hit_results)
     print("Hit results:")
     for i, hit in enumerate(hit_results):
         print(i, hit)
+    print("=================================")
 
     # Further parse sentences with hit words to extract number of positive and death cases
     positive_words = {'positive cases', 'Positive cases',
@@ -74,27 +99,38 @@ def scrapeHTML(str_url):
                       'total cases', 'total number of cases', 'Total number of cases'}
     death_words = {'deaths', 'death'}
 
-    # Examine words one or two away from the hit
-    positive_phrase_locations = []
-    negative_phrase_locations = []
-    delta = 40
+    # Examine words close to the hit
+    positive_numbers = []
+    death_numbers = []
     for idx_sent, sentence in enumerate(hit_results):
-        for word in positive_words:
-            idx_char = sentence.find(word)
-            if idx_char != -1:
-                search_range = (max(0, idx_char - delta),
-                                min(len(sentence)-1, idx_char + delta))
-                print(idx_sent, sentence[search_range[0]:search_range[1]])
-                print(
-                    re.match('.*\s[1-9]*.*', sentence[search_range[0]:search_range[1]]).group(0))
+        # print(idx_sent, sentence)
+        np = extract_num_cases(sentence, positive_words)
+        nd = extract_num_cases(sentence, death_words)
 
-                positive_phrase_locations.append((idx_sent, idx_char))
-        for word in death_words:
-            idx_char = sentence.find(word)
-            if idx_char != -1:
-                negative_phrase_locations.append((idx_sent, idx_char))
+        if np is not None:
+            positive_numbers.extend(np)
+        if nd is not None:
+            death_numbers.extend(nd)
+        # print(len(ans), len(positive_numbers))
+        # positive_numbers.union(extract_num_cases(sentence, positive_words))
 
-    #print(positive_phrase_locations, negative_phrase_locations)
+        # This part I'm not quite sure about. I'm assuming that the FIRST encounter of a number
+        # that exists close to a key phrase is the correct number of cases.
+        # This is a NLP issue, it depends on how people phrase the information. But in the cases
+        # we've looked at, this is sufficient.
+
+    if len(positive_numbers) > 0:
+        press_source.set_confirmed(positive_numbers[0])
+    else:
+        press_source.set_confirmed(0)
+
+    if len(death_numbers) > 0:
+        press_source.set_deaths(death_numbers[0])
+    else:
+        press_source.set_deaths(0)
+
+    print(press_source.confirmed)
+    print(press_source.deaths)
 
 
 if __name__ == "__main__":
