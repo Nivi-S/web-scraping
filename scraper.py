@@ -11,7 +11,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def extract_num_cases(sentence, word_set):
-    delta = 40
+    delta = 25
     numbers = []
     for word in word_set:
         idx_char = sentence.find(word)
@@ -22,11 +22,18 @@ def extract_num_cases(sentence, word_set):
             # print(sentence[search_range[0]:search_range[1]])
 
             num = re.search(
-                '\s[0-9]+',  sentence[search_range[0]:search_range[1]])
+                '(\s[0-9]+|one|two|three|four|five|six|seven|eight|nine|ten)',  sentence[search_range[0]:search_range[1]])
             if num is not None:
-                # print("Pattern matching:")
-                # print(num.group(0))
-                numbers.append(int(num.group(0).strip()))
+
+                matching = num.group(0)
+                convert = {'one': '1', 'two': '2', 'three': '3', 'four': '4', 'five': '5', 'six': '6',
+                           'seven': '7', 'eight': '8', 'nine': '9', 'ten': '10'}
+
+                print("Pattern matching:", word_set)
+                print(matching)
+                if matching in convert:
+                    matching = convert[matching]
+                numbers.append(int(matching.strip()))
 
     # print("Sentence's set of numbers", numbers)
     return numbers
@@ -69,6 +76,9 @@ def scrapeHTML(str_url):
 
     elif bool(re.search('.*cdph.*', str_url)):
         press_source = ps.pressSource("CA", str_url)
+
+    elif bool(re.search('.lapublichealth.*', str_url)):
+        press_source = ps.pressSource("LA", str_url)
     else:
         print("Site not recognized. We are not monitoring this site yet. Exiting")
         exit(1)
@@ -103,7 +113,7 @@ def scrapeHTML(str_url):
     positive_numbers = []
     death_numbers = []
     for idx_sent, sentence in enumerate(hit_results):
-        # print(idx_sent, sentence)
+        print(idx_sent, sentence)
         np = extract_num_cases(sentence, positive_words)
         nd = extract_num_cases(sentence, death_words)
 
@@ -120,28 +130,27 @@ def scrapeHTML(str_url):
         # we've looked at, this is sufficient.
 
     if len(positive_numbers) > 0:
-        press_source.set_confirmed(positive_numbers[0])
+        press_source.set_confirmed(max(positive_numbers))
     else:
         press_source.set_confirmed(0)
 
     if len(death_numbers) > 0:
-        press_source.set_deaths(death_numbers[0])
+        press_source.set_deaths(max(death_numbers))
     else:
         press_source.set_deaths(0)
 
-    print(press_source.confirmed)
-    print(press_source.deaths)
+    print("Confirmed: ", press_source.confirmed)
+    print("Deaths: ", press_source.deaths)
 
 
 if __name__ == "__main__":
-    url = 'https://www.cdc.gov/coronavirus/2019-ncov/cases-in-us.html'
+    #url = 'https://www.cdc.gov/coronavirus/2019-ncov/cases-in-us.html'
+    #url = 'https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Immunization/ncov2019.aspx'
+    url = 'https://twitter.com/lapublichealth/status/1236398593226895360'
+    # url = 'http://publichealth.lacounty.gov/media/Coronavirus/'
+    # url = 'https://sites.usc.edu/coronavirus/'
+    # url = 'https://newsroom.ucla.edu/stories/coronavirus-information-for-the-ucla-campus-community'
     scrapeHTML(url)
-    # scrapeHTML('https://sites.usc.edu/coronavirus/')
-    # scrapeHTML('http://publichealth.lacounty.gov/media/Coronavirus/')
-    # scrapeHTML(
-    #    'https://newsroom.ucla.edu/stories/coronavirus-information-for-the-ucla-campus-community')
-    # scrapeHTML(
-    #    'https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Immunization/ncov2019.aspx')
 
 # ============================
 
