@@ -35,7 +35,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex" href="index.html">
@@ -84,11 +84,11 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2" aria-controls="collapseUtilities2">
           <i class="fas fa-flag"></i>
-          <span>Nation</span>
+          <span>State</span>
         </a>
         <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-color.html">USA <span style="text-align:right"><input type="checkbox" checked></span> </a>
+            <a class="collapse-item" href="utilities-color.html">California <span style="text-align:right"><input type="checkbox" checked></span> </a>
           </div>
         </div>
       </li>
@@ -96,9 +96,14 @@
       
 
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities1" aria-controls="collapseUtilities1">
           <i class="fas fa-globe-americas"></i>
-          <span>World Health Org.</span></a>
+          <span>Nation</span></a>
+          <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="utilities-color.html">USA <span style="text-align:right"><input type="checkbox" checked></span> </a>
+            </div>
+          </div>
       </li>
 
       <!-- Divider -->
@@ -136,7 +141,7 @@
             <div class="input-group">
               <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-danger" type="button">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
@@ -267,7 +272,7 @@
 
                 <div class="col-lg-6 mb-20">
                   <div class="card shadow mb-12 mb-10">
-                    <div class="card-header py-3">
+                    <div class="card-header py-3 "  >
                       <!-- <a href="https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200307-sitrep-47-covid-19.pdf?sfvrsn=27c364a4_2" target="_blank"> -->
                         <h6 class="m-0 font-weight-bold text-info"><i class="fas fa-city"></i> </i><span>USC</span> </h6>
                       </a>
@@ -300,7 +305,7 @@
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                         </div>
-                        <p class="pl-3"><a id="USCurl" ><span id="USCheadline"></span></a></p>
+                        <p class="pl-3" style="height:47px;"><a id="USCurl" ><span id="USCheadline"></span></a></p>
                         <!-- <a target="_blank" rel="nofollow" href="https://undraw.co/">&nbsp;Read More &rarr;</a> -->
                       </div>
                       <span >
@@ -338,11 +343,12 @@
                         <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
                       </div> -->
                       <!-- Earnings (Monthly) Card Example -->
+                      <h6 class="mb-10 font-weight-bold"><span>Los Angeles</span> </h6>
+
                       <div class="row">
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                          <h6 class="m-0 font-weight-bold"><span>Los Angeles</span> </h6>
 
                           <div class="card border-left-primary shadow h-100 py-2">
                             <div class="card-body">
@@ -374,6 +380,51 @@
                       <span id = "LAdate">DATE</span>
                     </div>
                   </div>
+                </div>
+
+
+
+                <!-- WHO -->
+                <div class="col-lg-12 mb-20" style="margin-bottom:20px;">
+                  <div class="card shadow mb-12 mb-10">
+                    <div class="card-header py-3">
+                      <a href="https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200307-sitrep-47-covid-19.pdf?sfvrsn=27c364a4_2" target="_blank">
+                        <h6 class="m-0 font-weight-bold text-secondary"><i class="fas fa-globe-americas mr-2"></i><span>State</span> </h6>
+                      </a>
+                    </div>
+                    <div class="card-body">
+                    
+                      <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                          <div class="card border-left-secondary shadow h-100 py-2">
+                            <div class="card-body">
+                              <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Confirmed</div>
+                                  <div class="h5 mb-0 font-weight-bold text-gray-800" ><span id="CONFCA">-</span></div>
+                                </div>
+
+                                <div class="col ml-2">
+                                  <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Death</div>
+                                  <div class="h5 mb-0 font-weight-bold text-gray-800" ><span id="deathCA">-</span></div>
+                                </div>
+
+                                <!-- <div class="col-auto">
+                                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                </div> -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                        </div>
+                        <p class="pl-3"><a id="CAurl" ><span id="CAheadline"></span></a></p>
+                      </div>
+                      <span id = "CAdate">DATE</span>
+                    </div>
+                  </div>                  
                 </div>
 
 
@@ -424,48 +475,7 @@
               <!-- </div> -->
 
 
-<!-- WHO -->
-                <div class="col-lg-12 mb-20">
-                  <div class="card shadow mb-12 mb-10">
-                    <div class="card-header py-3">
-                      <a href="https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200307-sitrep-47-covid-19.pdf?sfvrsn=27c364a4_2" target="_blank">
-                        <h6 class="m-0 font-weight-bold text-secondary"><i class="fas fa-globe-americas mr-2"></i><span>CALIFORNIA</span> </h6>
-                      </a>
-                    </div>
-                    <div class="card-body">
-                    
-                      <div class="row">
-                        <div class="col-xl-3 col-md-6 mb-4">
-                          <div class="card border-left-secondary shadow h-100 py-2">
-                            <div class="card-body">
-                              <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Confirmed</div>
-                                  <div class="h5 mb-0 font-weight-bold text-gray-800" ><span id="CONFCA">-</span></div>
-                                </div>
 
-                                <div class="col ml-2">
-                                  <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Death</div>
-                                  <div class="h5 mb-0 font-weight-bold text-gray-800" ><span id="deathCA">-</span></div>
-                                </div>
-
-                                <!-- <div class="col-auto">
-                                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                </div> -->
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                        </div>
-                        <p class="pl-3"><a id="CAurl" ><span id="CAheadline"></span></a></p>
-                      </div>
-                      <span id = "CAdate">DATE</span>
-                    </div>
-                  </div>                  
-                </div>
 
               
 
@@ -477,7 +487,7 @@
                <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                   <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2019</span>
+                    <span>Copyright &copy; TLDR</span>
                   </div>
                 </div>
               </footer>
@@ -534,7 +544,7 @@
         	document.getElementById("CONFUCLA").innerHTML = blue.confirmed;
           document.getElementById("deathUCLA").innerHTML = blue.deaths;
           document.getElementById("UCLAurl").href = blue.url;
-          document.getElementById("UCLAheadline").innerHTML = 'https://newsroom.ucla.edu/stories/coronavirus/';
+          document.getElementById("UCLAheadline").innerHTML = blue.headline;//'https://newsroom.ucla.edu/stories/coronavirus/';
           document.getElementById("UCLAdate").innerHTML = blue.date;
           console.log(text);
         	return text;
@@ -549,7 +559,7 @@
         	document.getElementById("CONFUSC").innerHTML = blue.confirmed;
           document.getElementById("deathUSC").innerHTML = blue.deaths;
           document.getElementById("USCurl").href = blue.url;
-          document.getElementById("USCheadline").innerHTML = blue.url;
+          document.getElementById("USCheadline").innerHTML = blue.headline;
           document.getElementById("USCdate").innerHTML = blue.date;
         	return text;
         	 // Print the greeting as text
@@ -593,6 +603,7 @@
           document.getElementById("CAurl").href = blue.url;
           document.getElementById("CAheadline").innerHTML = blue.url;
           document.getElementById("CAdate").innerHTML = blue.date;
+          
         	return text;
         	 // Print the greeting as text
     	});
