@@ -1,4 +1,7 @@
-##**Our Inspiration**
+## Devpost Link
+https://devpost.com/software/tldr-coronavirus.
+
+## **Our Inspiration**
 
 _TLDR: Coronavirus_ was inspired by the mass hysteria and fear we feel at the rapid spread of COVID-19 in our daily lives. Whether it is the various news media sprouting unverified numbers, leading to a fear frenzy of rumors, or the numerous news sources we need to check to stay updated on the local and global level, **staying updated is slowed down by the different levels of news sources we have to keep track of**.
 
@@ -7,7 +10,7 @@ Keeping track of different reporting levels is important because information abo
 Enter _TLDR: Coronavirus_, which allows users to track all of these customized locations from official verified sources, helping people keep track of the health security for themselves and their loved ones, all in one place.  We especially honed in on local locations & college campuses since we ourselves have experienced how easily rumors can spread. Universities in particular may be the next outbreak hot spot, especially after travels during Spring Break. **_TLDR: Coronavirus_ can help keep everyone in our communities informed.**
 
 
-##**What it does**
+## **What it does**
 
 • On the website, users can highlight locations they want to generate and track by using our left filter bar (which breaks down to Institutions, Regional, National, and Global.)
 
@@ -36,6 +39,3 @@ We want to implement more visualization functionalities to our website. As we ai
 We'd like to have web scraping that can handle a larger diversity of websites and more generalized pattern matching.
 A “generate feed” button could update the page with all the new checked locations you want. 
 Live notifications for our site could send text notifications for news update on user’s tracked locations
-
-## Devpost Link
-https://devpost.com/software/tldr-coronavirus. 
