@@ -59,8 +59,8 @@
         </a>
         <div id="collapseUtilities4" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-color.html">UCLA <span style="text-align:right"><input type="checkbox"></span> </a>
-            <a class="collapse-item" href="utilities-border.html">USC <span style="text-align:right"><input type="checkbox"></span></a>
+            <a class="collapse-item" href="utilities-color.html">UCLA <span style="text-align:right"><input type="checkbox" checked ></span> </a>
+            <a class="collapse-item" href="utilities-border.html">USC <span style="text-align:right"><input type="checkbox" checked ></span></a>
           
           </div>
         </div>
@@ -74,7 +74,7 @@
         </a>
         <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-color.html">Los Angeles <span style="text-align:right"><input type="checkbox"></span> </a>
+            <a class="collapse-item" href="utilities-color.html">Los Angeles <span style="text-align:right"><input type="checkbox" checked></span> </a>
           </div>
         </div>
       </li>
@@ -88,7 +88,7 @@
         </a>
         <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-color.html">USA <span style="text-align:right"><input type="checkbox"></span> </a>
+            <a class="collapse-item" href="utilities-color.html">USA <span style="text-align:right"><input type="checkbox" checked></span> </a>
           </div>
         </div>
       </li>
@@ -241,7 +241,9 @@
                                 <div class="col ml-2">
                                   <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Death</div>
                                   <div class="h5 mb-0 font-weight-bold text-gray-800" ><span id="deathUCLA">-</span></div>
+
                                 </div>
+                                
 
                                 <!-- <div class="col-auto">
                                   <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -250,6 +252,7 @@
                             </div>
                           </div>
                         </div>
+                       
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -257,6 +260,7 @@
                         <p class="pl-3"><a id="UCLAurl" ><span id="UCLAheadline"></span></a></p>
 <!--                         <a target="_blank" rel="nofollow" href="https://undraw.co/">&nbsp;Read More &rarr;</a>
  -->                      </div>
+                        <span id = "UCLAdate">DATE</span>
                     </div>
                   </div>                  
                 </div>
@@ -299,6 +303,10 @@
                         <p class="pl-3"><a id="USCurl" ><span id="USCheadline"></span></a></p>
                         <!-- <a target="_blank" rel="nofollow" href="https://undraw.co/">&nbsp;Read More &rarr;</a> -->
                       </div>
+                      <span >
+
+                      </span>
+                      <span id = "USCdate">DATE</span>
                     </div>
                   </div>                  
                 </div>
@@ -353,6 +361,7 @@
                                   <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                 </div> -->
                               </div>
+                              
                             </div>
                           </div>
                         </div>
@@ -362,6 +371,7 @@
                         </div>
                         <p class="pl-3"><a id="LAurl" ><span id="LAheadline"></span></a></p>
                       </div>
+                      <span id = "LAdate">DATE</span>
                     </div>
                   </div>
                 </div>
@@ -406,6 +416,7 @@
                         </div>
                         <p class="pl-3"><a id="CDCurl" ><span id="CDCheadline"></span></a></p>
                       </div>
+                      <span id = "CDCdate">DATE</span>
                     </div>
                   </div>                  
                 </div>
@@ -451,6 +462,7 @@
                         </div>
                         <p class="pl-3"><a id="CAurl" ><span id="CAheadline"></span></a></p>
                       </div>
+                      <span id = "CAdate">DATE</span>
                     </div>
                   </div>                  
                 </div>
@@ -522,8 +534,8 @@
         	document.getElementById("CONFUCLA").innerHTML = blue.confirmed;
           document.getElementById("deathUCLA").innerHTML = blue.deaths;
           document.getElementById("UCLAurl").href = blue.url;
-          document.getElementById("UCLAheadline").innerHTML = blue.url;
-          
+          document.getElementById("UCLAheadline").innerHTML = 'https://newsroom.ucla.edu/stories/coronavirus/';
+          document.getElementById("UCLAdate").innerHTML = blue.date;
           console.log(text);
         	return text;
         	 // Print the greeting as text
@@ -538,6 +550,7 @@
           document.getElementById("deathUSC").innerHTML = blue.deaths;
           document.getElementById("USCurl").href = blue.url;
           document.getElementById("USCheadline").innerHTML = blue.url;
+          document.getElementById("USCdate").innerHTML = blue.date;
         	return text;
         	 // Print the greeting as text
     	});
@@ -551,6 +564,7 @@
           document.getElementById("deathLA").innerHTML = blue.deaths;
           document.getElementById("LAurl").href = blue.url;
           document.getElementById("LAheadline").innerHTML = blue.url;
+          document.getElementById("LAdate").innerHTML = blue.date;
         	return text;
         	 // Print the greeting as text
     	});
@@ -564,6 +578,7 @@
           document.getElementById("deathCDC").innerHTML = blue.deaths;
           document.getElementById("CDCurl").href = blue.url;
           document.getElementById("CDCheadline").innerHTML = blue.url;
+          document.getElementById("CDCdate").innerHTML = blue.date;
         	return text;
         	 // Print the greeting as text
     	});
@@ -577,6 +592,7 @@
           document.getElementById("deathCA").innerHTML = blue.deaths;
           document.getElementById("CAurl").href = blue.url;
           document.getElementById("CAheadline").innerHTML = blue.url;
+          document.getElementById("CAdate").innerHTML = blue.date;
         	return text;
         	 // Print the greeting as text
     	});
