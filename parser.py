@@ -28,10 +28,17 @@ def parseHTML(str_url):
         searched_word = 'STATUS'
 
     if bool(re.search('.*cdph.*', str_url)):
-        searched_word = 'STATUS'
+        searched_word = 'positive\scases'
+
 
     results = soup.find_all(string=re.compile(
         '.*{0}.*'.format(searched_word)), recursive=True)
+    
+    results = [el.replace('\xa0',' ') for el in results]
+    #for x in results:
+       # x  = x.replace(u'\xa0', u' ')
+        #results.append(x)
+
     print('results =', results)
 
     date = soup.find_all(string=re.compile('[ADFJMNOS]\w* [\d]{1,2},* [\d]{4}'))
