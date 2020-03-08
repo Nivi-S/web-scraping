@@ -11,8 +11,7 @@ import pressSource as ps
 
 
 def parseHTML(str_url):
-    content = requests.get(
-        'https://www.cdc.gov/coronavirus/2019-ncov/cases-in-us.html')
+    content = requests.get(str_url)
     soup = BeautifulSoup(content.text, 'html.parser')
 
     searched_word = 'Total'
@@ -28,7 +27,7 @@ def parseHTML(str_url):
 
     print(soup.title.text)
 
-    CDC = ps.pressSource("national", str_url)
+    CDC = ps.pressSource(ps.level.NATIONAL, str_url)
 
 
 if __name__ == "__main__":
