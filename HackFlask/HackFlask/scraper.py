@@ -4,6 +4,7 @@ import re
 import requests
 import pressSource as ps
 import urllib3
+from flask import jsonify
 # import flask
 
 
@@ -141,6 +142,14 @@ def scrapeHTML(str_url):
 
     print("Confirmed: ", press_source.confirmed)
     print("Deaths: ", press_source.deaths)
+
+    return jsonify(
+        confirmed=press_source.confirmed,
+        deaths=press_source.deaths,
+        level=press_source.level,
+        url=press_source.url,
+        date=press_source.date
+    )
 
 
 if __name__ == "__main__":
