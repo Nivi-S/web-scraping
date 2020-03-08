@@ -16,8 +16,8 @@ class pressSource:
         self.confirmed = 0
         self.deaths = 0
 
-    def increase_death(self):
-        self.deaths += 1
+    def increase_death(self, count):
+        self.deaths = count
 
-    def increase_confirmed(self):
-        self.confirmed += 1
+    def increase_confirmed(self, count):
+        self.confirmed = count
